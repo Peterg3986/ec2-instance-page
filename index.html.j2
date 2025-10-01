@@ -1,0 +1,11 @@
+<!doctype html>
+<html>
+  <head><meta charset="utf-8"><title>EC2 Instance Page</title></head>
+  <body>
+    <h1>EC2 Instance Info</h1>
+    <p><strong>Hostname:</strong> {{ ansible_hostname }}</p>
+    <p><strong>Private IP:</strong> {{ ansible_default_ipv4.address }}</p>
+    <p><strong>All IPs:</strong> {{ ansible_all_ipv4_addresses | join(', ') }}</p>
+    <p><em>This file was rendered by Ansible on {{ ansible_date_time.date }} at {{ ansible_date_time.time }}.</em></p>
+  </body>
+</html>
