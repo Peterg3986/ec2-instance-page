@@ -1,0 +1,28 @@
+- name: Configure EC2 Web Servers
+  hosts: web
+  become: yes
+
+  tasks:
+    - name: Install Nginx (Ubuntu/Debian)
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Ensure Nginx is enabled and running
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Install git
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+
+    - name: Deploy custom index.html
+      template:
+        src: /home/vagrant/ec2-instance-page/index.html.j2
+        dest: /var/www/html/index.html
